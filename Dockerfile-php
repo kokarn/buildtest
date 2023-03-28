@@ -1,6 +1,10 @@
 FROM php:8.1.13-fpm-alpine3.16
 
-RUN apk add yarn python3
+RUN apk add yarn
+
+RUN apk --no-cache add --virtual native-deps \
+    g++ gcc libgcc libstdc++ linux-headers make python3 && \
+    yarn global add node-gyp
 
 WORKDIR /usr/src/app
 
